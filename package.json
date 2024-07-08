@@ -1,0 +1,30 @@
+{
+  "name": "aula-criacao",
+  "version": "1.0.0",
+  "description": "\"chat-api\"",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./bin/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vick1407/api-chat.git"
+  },
+  "keywords": [
+    "NODE",
+    "CHAT",
+    "API"
+  ],
+  "author": "vitoria",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vick1407/api-chat/issues"
+  },
+  "homepage": "https://github.com/vick1407/api-chat#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.8.0"
+  }
+}
