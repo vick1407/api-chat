@@ -1,14 +1,34 @@
-
-
 require('dotenv').config();
-const app = require("../src/api");
+const express = require('express');
+const { connect } = require('../src/models/db');  
+const app = express();
 
-app.use((req, res, next)=>{
-    next();
-})
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true })); 
 
-let port = process.env.API_PORT || 5000;
 
-app.listen(port);
+const apiRouter = require('../src/api'); 
+app.use('/', apiRouter);
 
-console.log("Starting in port " +port);
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send({ error: 'Algo deu errado!' });
+});
+
+
+async function startServer() {
+    try {
+        await connect(); 
+
+        const port = process.env.API_PORT || 5000;
+        app.listen(port, () => {
+            console.log(`Servidor iniciado na porta ${port}`);
+        });
+    } catch (error) {
+        console.error('Erro ao conectar ao banco de dados ou iniciar o servidor:', error);
+        process.exit(1); 
+    }
+}
+
+startServer();
