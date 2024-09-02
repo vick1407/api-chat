@@ -33,16 +33,12 @@ const salaController = {
     addUserToSala: async (usuarioId, salaId) => {
         // Lógica para adicionar o usuário à sala
         // Atualize o banco de dados conforme necessário
-    },
-    apagarSala: async (id) => {
-        return await db.deleteOne('salas', { id });
     }
 };
 
 router.get('/', (req, res) => {
     res.status(200).send("<h1>API-CHAT</h1>");
 });
-
 
 router.get('/sobre', (req, res) => {
     res.status(200).send({
@@ -52,7 +48,6 @@ router.get('/sobre', (req, res) => {
     });
 });
 
-
 router.get('/salas', async (req, res) => {
     try {
         let resp = await salaController.get();
@@ -61,7 +56,6 @@ router.get('/salas', async (req, res) => {
         res.status(500).send({ error: 'Erro ao buscar salas' });
     }
 });
-
 
 router.post('/salas', async (req, res) => {
     try {
@@ -74,22 +68,6 @@ router.post('/salas', async (req, res) => {
         res.status(201).send(sala);
     } catch (error) {
         res.status(500).send({ error: 'Erro ao criar sala' });
-    }
-});
-
-
-router.delete('/salas/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        if (!id) {
-            return res.status(400).send({ error: 'ID da sala é necessário' });
-        }
-
-        const resultado = await salaController.apagarSala(id);
-        res.status(200).send({ mensagem: 'Sala apagada com sucesso', resultado });
-    } catch (error) {
-        console.error('Erro ao apagar sala:', error);
-        res.status(500).send({ error: 'Erro ao apagar sala' });
     }
 });
 
@@ -108,7 +86,6 @@ router.post('/salas/mensagens', async (req, res) => {
     }
 });
 
-
 router.get('/salas/mensagens', async (req, res) => {
     try {
         const { salaId } = req.query;
@@ -124,7 +101,6 @@ router.get('/salas/mensagens', async (req, res) => {
     }
 });
 
-
 router.post('/entrar', async (req, res) => {
     try {
         const { apelido } = req.body;
@@ -139,7 +115,6 @@ router.post('/entrar', async (req, res) => {
         res.status(500).send({ error: 'Erro ao registrar usuário' });
     }
 });
-
 
 router.post('/entrar-sala', async (req, res) => {
     try {
